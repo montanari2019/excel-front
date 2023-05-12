@@ -6,6 +6,7 @@ import "./App.css";
 function App() {
   const [selectedFile, setSelectedFile] = useState<any>(null);
   const [json, setJson] = useState([]);
+  const [counter, setCounter] = useState(0);
 
   async function resquestApi(file: any) {
     console.log("Chamando api");
@@ -23,6 +24,7 @@ function App() {
       const data = await response.json();
       console.log(data);
       setJson(data);
+      setCounter(1)
     } catch (error) {
       console.error(error);
     }
@@ -34,9 +36,14 @@ function App() {
 
   async function handleSelectFile(event: React.ChangeEvent<HTMLInputElement>) {
     event.preventDefault();
-
+    setCounter(0)
     if (event.target.files) {
+      setTimeout(() => {
+        
+        setCounter(1)
+      }, 1000);
       setSelectedFile(event.target.files[0]);
+      setJson([])
 
       // setSelectedFile()
     }
@@ -68,6 +75,12 @@ function App() {
 
       <br />
       <br />
+      {
+        counter === 0 ? <>Informe um aquivo tipo execel</> : 
+        <>
+
+        </>
+      }
       {
         json.length === 0 ? <h2>Loading ...</h2> : <><pre>
         <code>{JSON.stringify(json, null, 2)}</code>
