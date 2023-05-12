@@ -68,9 +68,12 @@ function App() {
 
       <br />
       <br />
-      <pre>
+      {
+        json.length === 0 ? <h2>Loading ...</h2> : <><pre>
         <code>{JSON.stringify(json, null, 2)}</code>
-      </pre>
+      </pre></>
+      }
+      
     </>
   );
 }
